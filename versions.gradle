@@ -1,0 +1,100 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+
+ext.deps = [:]
+def versions = [:]
+
+versions.appId = "com.koindroid"
+versions.gradle = '3.5.1'
+versions.gcmGoogleService = '4.3.2'
+versions.kotlin_version = '1.3.61'
+versions.appcompat = '1.1.0'
+versions.ktx = '1.1.0'
+versions.constraintlayout = '1.1.3'
+versions.recyclerView = '1.0.0'
+versions.googleMaterial = "1.1.0-beta01"
+versions.runner = '1.1.0'
+
+versions.room = "2.1.0-alpha06"
+versions.lifecycle_version = '2.0.0'
+versions.timber_version = '4.7.1'
+versions.koin_version = '2.0.0-rc-2'
+versions.rxjava2Version = '2.0.6'
+versions.rxandroidVersion = '2.1.1'
+versions.koinArchitecture = '0.9.1'
+
+versions.retrofit_version = '2.5.0'
+versions.loggingInterceptor = '3.4.1'
+versions.okhttp = '3.12.0'
+versions.urlconnection = '3.0.1'
+deps.versions = versions
+
+def gradle = [:]
+gradle.core = "com.android.tools.build:gradle:$versions.gradle"
+gradle.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin_version"
+gradle.gcmService = "com.google.gms:google-services:$versions.gcmGoogleService"
+deps.gradle = gradle
+
+def jdk = [:]
+jdk.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin_version"
+deps.jdk = jdk
+
+def androidX = [:]
+androidX.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+androidX.ktx = "androidx.core:core-ktx:$versions.ktx"
+androidX.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+androidX.AndroidJUnitRunner = "androidx.test.runner.AndroidJUnitRunner"
+androidX.recyclerView = "androidx.recyclerview:recyclerview:$versions.recyclerView"
+androidX.googleMaterial = "com.google.android.material:material:$versions.googleMaterial"
+deps.androidX = androidX
+
+def retrofit = [:]
+retrofit.core = "com.squareup.retrofit2:retrofit:$versions.retrofit_version"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit_version"
+retrofit.adapter = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit_version"
+retrofit.interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptor"
+retrofit.okHttp = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+retrofit.urlConnection = "com.squareup.okhttp3:okhttp-urlconnection:$versions.urlconnection"
+deps.retrofit = retrofit
+
+def rx2Java = [:]
+rx2Java.core = "io.reactivex.rxjava2:rxjava:$versions.rxjava2Version"
+rx2Java.android = "io.reactivex.rxjava2:rxandroid:$versions.rxandroidVersion"
+deps.rx2Java = rx2Java
+
+def lifeCycle = [:]
+lifeCycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle_version"
+lifeCycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_version"
+deps.lifeCycle = lifeCycle
+
+def koin = [:]
+koin.scope = "org.koin:koin-androidx-scope:$versions.koin_version"
+koin.architecture = "org.koin:koin-android-architecture:$versions.koinArchitecture"
+koin.viewModel = "org.koin:koin-androidx-viewmodel:$versions.koin_version"
+deps.koin = koin
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+room.testing = "androidx.room:room-testing:$versions.room"
+deps.room = room
+
+def logging = [:]
+logging.timber = "com.jakewharton.timber:timber:$versions.timber_version"
+deps.logging = logging
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url "https://kotlin.bintray.com/kotlinx/" }
+    handler.maven { url "https://jitpack.io" }
+}
+
+ext.addRepos = this.&addRepos
+

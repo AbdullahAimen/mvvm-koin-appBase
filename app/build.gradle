@@ -1,0 +1,108 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId deps.versions.appId
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner deps.androidX.AndroidJUnitRunner
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"http://pharmaclue.com\"")
+        }
+        release {
+            buildConfigField("String", "BASE_URL", "\"http://pharmaclue.com\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    androidExtensions {
+        //for Parcelize annotation
+        experimental = true
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.jdk.stdlib
+    implementation deps.androidX.appcompat
+    implementation deps.androidX.ktx
+    implementation deps.androidX.constraintlayout
+    implementation deps.androidX.recyclerView
+    implementation deps.androidX.googleMaterial
+
+    /**
+     * AndroidX (based on koin-android)
+     * Koin AndroidX Scope feature
+     */
+    implementation deps.koin.scope
+    implementation deps.koin.architecture
+    implementation deps.koin.viewModel
+
+    /**
+     * Timber
+     */
+    implementation deps.logging.timber
+
+    /**
+     * Room
+     * */
+    implementation deps.room.runtime
+    implementation deps.room.rxjava2
+    kapt deps.room.compiler
+
+    /**
+     * RX2Java
+     * */
+    implementation deps.rx2Java.core
+    implementation deps.rx2Java.android
+
+    /**
+     * lifeCycle
+     * */
+    implementation deps.lifeCycle.extensions
+    implementation deps.lifeCycle.viewmodel
+
+    /**
+     * Retrofit
+     */
+    implementation deps.retrofit.core
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.adapter
+    implementation deps.retrofit.interceptor
+    implementation deps.retrofit.okHttp
+    implementation deps.retrofit.urlConnection
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
