@@ -50,6 +50,11 @@ class LandingViewModel(
     }
 
     fun write() {
+        if (lang.equals("")) {
+            mLandingCommand.value =
+                Event(LandingCommand.ShowErrorMessage("empty string error "))
+            return
+        }
         mCommonRepo.setLang(lang)
     }
 

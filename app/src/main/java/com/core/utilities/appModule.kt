@@ -2,6 +2,7 @@ package com.core.utilities
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.koindroid.screens.landing.LandingViewModel
+import com.koindroid.screens.record.RecordViewModel
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -25,5 +26,6 @@ val appModule = module {
      * ViewModel
      * */
     viewModel { LandingViewModel(get()) }
+    viewModel { RecordViewModel() }
 
 }

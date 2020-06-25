@@ -23,7 +23,15 @@ class CommonRepo(private val mIDomainManager: IDomainManager) {
     }
 
     fun insertRecords(records: ArrayList<RecordInfo>) {
-        mIDomainManager.insertRecord(records)
+        mIDomainManager.getAppExecutors().diskIO().execute {
+            mIDomainManager.insertRecord(records)
+        }
+    }
+
+    fun deleteRecords() {
+        mIDomainManager.getAppExecutors().diskIO().execute {
+            mIDomainManager.deleteAllRecords()
+        }
     }
 
     fun getLang() = mIDomainManager.getLanguage()

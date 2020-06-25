@@ -38,8 +38,14 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
                         Toast.makeText(this, it.record.recordName, Toast.LENGTH_LONG).show()
 
                     }
+                    is LandingCommand.ShowErrorMessage -> {
+                        Toast.makeText(this, it.msg, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         })
+        mViewBinding.button.setOnClickListener {
+            //open dialog ()
+        }
     }
 }

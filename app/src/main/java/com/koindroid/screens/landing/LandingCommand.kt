@@ -8,5 +8,5 @@ import com.core.model.RecordInfo
 sealed class LandingCommand {
     object SessionExpired : LandingCommand()
     class AssignRecordInfo(val record: RecordInfo) : LandingCommand()
-
+    class ShowErrorMessage(val msg: String) : LandingCommand()
 }
