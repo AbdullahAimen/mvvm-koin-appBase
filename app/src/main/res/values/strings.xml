@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MvvmKoinDroid</string>
+
+    <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
+    <string name="playing_notification_name">Playing notification</string>
+    <string name="unplayable_file">Could not play this record.</string>
+    <string name="audio_focus_denied">Audio focus denied.</string>
+
+    <string name="action_pause">Pause</string>
+    <string name="action_play">Play</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_resume">Resume</string>
+
 </resources>

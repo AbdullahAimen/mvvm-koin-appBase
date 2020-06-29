@@ -1,11 +1,9 @@
 package com.core.model
 
 import android.os.Parcelable
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
-import java.io.File
 
 /**
  * @author Abdullah Ayman on 23/06/2020
@@ -14,7 +12,8 @@ import java.io.File
 @Entity(tableName = "RecordInfo")
 data class RecordInfo(
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
+    var id: Long = -1,
+    var recordUri: String,
     var recordName: String,
     var recordDuration: String,
     var recordSize: String,
@@ -22,4 +21,15 @@ data class RecordInfo(
     var selectionMode: Boolean = false,
     var fileSelected: Boolean = false,
     var isPlaying: Boolean = false
-) : Parcelable
+) : Parcelable {
+
+    companion object {
+        fun emptyRecord(): RecordInfo = RecordInfo(
+            recordUri = "",
+            recordName = "",
+            recordCreationDate = "",
+            recordSize = "",
+            recordDuration = ""
+        )
+    }
+}

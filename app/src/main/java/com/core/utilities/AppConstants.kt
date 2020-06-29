@@ -21,6 +21,12 @@ class AppConstants {
         const val NULL_INDEX = -1L
         const val SHARED_PREFERENCE_NAME = "_sp"
 
+        fun getSeconds(milliseconds: Int): Int {
+            return (milliseconds / 1000) % 60
+        }
 
+        fun getMinutes(milliseconds: Int): Int {
+            return (milliseconds / 1000) / 60
+        }
     }
 }
