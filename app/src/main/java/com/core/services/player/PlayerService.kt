@@ -389,7 +389,7 @@ class PlayerService : Service(), PlaybackCallbacks {
                     mMusicService.mPlayerServiceCommand.postValue(Event(PlayerServiceCommand.UpdateVolume))
                 }
                 RELEASE_WAKELOCK -> mMusicService.releaseWakeLock()
-                STOP_WATCH_UPDATE -> {
+                STOP_WATCH_UPDATE -> if (mMusicService.playback!!.isPlaying()){
                     mMusicService.updateStopWatch()
                     sendEmptyMessageDelayed(STOP_WATCH_UPDATE, 500)
                 }
